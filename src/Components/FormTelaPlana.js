@@ -1,33 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 
 
 export default function FormTelaPlana(){
+    const navigate = useNavigate();
     const {tasks, setTasks} = useContext(UserContext)
     const usuario = localStorage.getItem("usuario")
     const usuarioDados = JSON.parse(usuario)
-    console.log(tasks)
     
     const {idPlano} = useParams();
     const [compra, setCompra] = useState({
         cardName: "",
-        cardNumber: "1234 1234 1234 1234",
-        cvc: 123,
-        data: "01/28"
+        cardNumber: "",
+        cvc: "",
+        data: ""
     });
     
     function temCerteza(event){
         event.preventDefault();
         setTasks({...tasks, toggle: true});
     }
-    
     if(tasks.confirmarCompra === true){
-
+        finalizarCompra();
+    }
+    
+    function finalizarCompra(){
         const URL = `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions`;
         const body = {
             membershipId: idPlano,
@@ -41,19 +43,21 @@ export default function FormTelaPlana(){
         }
         const promise = axios.post(URL, body, config);
         promise.then((response)=>{
-            console.log(response)
-            alert("deucert")
-
+            console.log(response.data)
+            navigate("/home")
         })
-        promise.catch((err)=> console.log(err.message))
+        promise.catch((err)=> {
+            alert("Verifique seus dados e tente novamente")
+            console.log(err.message)
+        })
     }
 
     return(
         <>
             <Conteiner >
                 <form onSubmit={temCerteza}>
-                    <Inserir id="cartao" type="text" placeholder="Nome impresso no cartão" value={compra.nome} onChange={(e)=>
-                        setCompra({...compra, nome: e.target.value})
+                    <Inserir id="cartao" type="text" placeholder="Nome impresso no cartão" value={compra.cardName} onChange={(e)=>
+                        setCompra({...compra, cardName: e.target.value})
                         } required/>
 
                     <Inserir type="text" placeholder="Digitos do cartão" maxlength="10" title="" 

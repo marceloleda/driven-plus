@@ -4,14 +4,16 @@ import UserContext from "../contexts/UserContext";
 
 export default function TelaConfirmarCompra(){
     const {tasks, setTasks} = useContext(UserContext);
-    console.log(tasks)
     return(
         <>
             <Confirmar>
                 <h1>Tem certeza que deseja assinar o plano {tasks.nome} (R$ {tasks.preco})?</h1>
                 <Botoes>
                     <BotaoConfirmar onClick={()=>{
-                        setTasks({...tasks, toggle: false})
+                        setTasks({...tasks, 
+                            toggle: false,
+                            confirmarCompra: false
+                        })
                     }} >Não</BotaoConfirmar>
                     <BotaoConfirmar onClick={()=>{
                         setTasks({...tasks, confirmarCompra: true})
