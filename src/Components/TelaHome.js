@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export default function TelaHome(){
+    const home = localStorage.getItem("home")
+    const homeDados = JSON.parse(home)
+
     return(
         <>
             <Conteiner>

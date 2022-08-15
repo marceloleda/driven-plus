@@ -10,6 +10,12 @@ import { useParams, useNavigate } from "react-router-dom";
 export default function FormTelaPlana(){
     const navigate = useNavigate();
     const {tasks, setTasks} = useContext(UserContext)
+    const [home, setHome] = useState([])
+
+    const homeDados = JSON.stringify(home)
+    localStorage.setItem("home", homeDados)
+
+
     const usuario = localStorage.getItem("usuario")
     const usuarioDados = JSON.parse(usuario)
     
@@ -44,6 +50,7 @@ export default function FormTelaPlana(){
         const promise = axios.post(URL, body, config);
         promise.then((response)=>{
             console.log(response.data)
+            setHome(response.data)
             navigate("/home")
         })
         promise.catch((err)=> {

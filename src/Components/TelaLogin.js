@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function TelaLogin(){
     const navigate = useNavigate();
     const [usuario, setUsuario] = useState([]);
+    const [home, setHome] = useState([null])
     const [login, setLogin] = useState({
         email: "",
         senha: ""
@@ -28,8 +29,14 @@ export default function TelaLogin(){
         const promise = axios.post(URL, dados)
         promise.then((response)=>{
             setUsuario(response.data)
-            console.log(response.data)
-            navigate(`${usuario.membership !== null? "/subscriptions" : "/home"}`)
+            setHome(response.data.membership)
+            console.log(home)
+            if(home === null){
+                navigate(`/subscriptions`)
+            }else{
+                navigate(`/home`)                
+            }
+
 
         })
         console.log(usuario.membership)
