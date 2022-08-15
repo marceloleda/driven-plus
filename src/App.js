@@ -12,7 +12,7 @@ import TelaPlano from "./Components/TelaPlano";
 
 export default function App(){
     const [tasks, setTasks] = useState([]);
-    const contextValue = {tasks, setTasks}
+    const contextValue = { tasks, setTasks };
     return(
         <>
             <GlobalStyle/>
@@ -22,7 +22,7 @@ export default function App(){
                         <Route path="/" element={<TelaLogin/>}/>
                         <Route path="/sign-up" element={<TelaCadastro/>}/>
                         <Route path="/subscriptions" element={<TelaInscricao/>}/>
-                        <Route path="/subscriptions/:idPlano" element={<TelaPlano/>}
+                        <Route path="/subscriptions/:idPlano" element={<TelaPlano/>}/>
 
                     </Routes>
                 </BrowserRouter>

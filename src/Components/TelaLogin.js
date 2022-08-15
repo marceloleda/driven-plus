@@ -3,14 +3,10 @@ import styled from "styled-components";
 import Logo from "../Assets/img/Driven.svg"
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
-import UserContext from "../contexts/UserContext";
-import { useContext } from "react";
-
 
 
 
 export default function TelaLogin(){
-    const { tasks, setTasks } = useContext(UserContext);
     const navigate = useNavigate();
     const [usuario, setUsuario] = useState([]);
     const [login, setLogin] = useState({
@@ -19,7 +15,8 @@ export default function TelaLogin(){
     })
     const dadosUsuario = JSON.stringify(usuario)
     localStorage.setItem("usuario", dadosUsuario)
-    
+  
+
 
     function enviar(event){
         event.preventDefault();

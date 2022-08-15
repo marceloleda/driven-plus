@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { Link, useNavigate } from 'react-router-dom';
+import UserContext from "../contexts/UserContext";
 
 export default function TelaInscricao(){
+    const navigate = useNavigate();
+
     const usuario = localStorage.getItem("usuario")
     const usuarioDados = JSON.parse(usuario)
-    console.log(usuarioDados)
 
     const [planos, setPlanos] = useState([]);
     
@@ -21,17 +24,21 @@ export default function TelaInscricao(){
         promise.catch((err)=> console.log(err.message))
 
     },[])
-    
+    function planoSelecionado(){
+        
+    }
     return(
         <>
             <Conteiner>
                 <h1>Escolha seu Plano</h1>
                 {planos.map((plano, index)=>{
                     return(
-                        <Plano key={index} onClick={()=> alert('clic')}>
-                            <img src={plano.image} alt={plano.id} />
-                            <h2>R$ {plano.price}</h2>
-                        </Plano>
+                        <Link key={index} to={`/subscriptions/${plano.id}`} style={{ textDecoration: 'none' }}>
+                            <Plano >
+                                <img src={plano.image} alt={plano.id} />
+                                <h2>R$ {plano.price}</h2>
+                            </Plano>
+                        </Link>
                     )
                 })}
                
