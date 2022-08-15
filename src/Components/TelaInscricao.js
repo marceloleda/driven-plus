@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import UserContext from "../contexts/UserContext";
 import styled from "styled-components";
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,8 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 export default function TelaInscricao(){
-    const navigate = useNavigate();
-
 
     const usuario = localStorage.getItem("usuario")
     const usuarioDados = JSON.parse(usuario)

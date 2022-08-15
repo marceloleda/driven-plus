@@ -1,16 +1,18 @@
 import {useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Perks from "../Assets/img/Vector.svg"
 import Money from "../Assets/img/money.svg"
 import UserContext from "../contexts/UserContext";
 import FormTelaPlana from "./FormTelaPlana";
 import TelaConfirmarCompra from "./TelaConfirmarCompra";
+import Seta from "../Assets/img/arrow.svg"
 
 
 
 export default function TelaPlano(){
+    const navigate = useNavigate();
     const {tasks, setTasks} = useContext(UserContext);
     console.log(tasks)
     const usuario = localStorage.getItem("usuario")
@@ -32,7 +34,9 @@ export default function TelaPlano(){
             setTasks({...tasks, 
                 preco: response.data.price,
                 nome: response.data.name,
-                toggle: toggle
+                toggle: toggle,
+                image: response.data.image,
+                perks: response.data.perks
             })
 
         })
@@ -41,7 +45,11 @@ export default function TelaPlano(){
     return(
         <>
             {tasks.toggle === false ? "" : <TelaConfirmarCompra />}
-
+            <Voltar onClick={()=>{
+                navigate(`/subscriptions`)
+            }}>
+                <img src={Seta} alt="arrow"/>
+            </Voltar>
             <Conteiner load={tasks.toggle}>
                 <img src={plano.image} alt="image"/>
                 <h1>{plano.name}</h1>
@@ -82,7 +90,7 @@ const Conteiner = styled.div`
     img{
         width: 140px;
         height: 95px;
-        margin-top: 90px;
+        margin-top: 20px;
     }
     h1{
         margin-top:12px;
@@ -135,5 +143,11 @@ h2{
     line-height: 19px;
     color: #FFFFFF;
 }
+
+`
+const Voltar = styled.div`
+margin-left:30px;
+margin-top:25px;
+cursor: pointer;
 
 `

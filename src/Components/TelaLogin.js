@@ -1,23 +1,25 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import Logo from "../Assets/img/Driven.svg"
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
+import UserContext from "../contexts/UserContext";
 
 
 
 export default function TelaLogin(){
+    const {tasks, setTasks} = useContext(UserContext);
     const navigate = useNavigate();
     const [usuario, setUsuario] = useState([]);
-    const [home, setHome] = useState([null])
+    const [home, setHome] = useState({})
     const [login, setLogin] = useState({
         email: "",
         senha: ""
     })
     const dadosUsuario = JSON.stringify(usuario)
     localStorage.setItem("usuario", dadosUsuario)
-  
 
+    console.log(home)
 
     function enviar(event){
         event.preventDefault();
@@ -29,17 +31,13 @@ export default function TelaLogin(){
         const promise = axios.post(URL, dados)
         promise.then((response)=>{
             setUsuario(response.data)
-            setHome(response.data.membership)
-            console.log(home)
-            if(home === null){
-                navigate(`/subscriptions`)
-            }else{
-                navigate(`/home`)                
-            }
-
+            {response.data.membership ? navigate(`/home`) : navigate(`/subscriptions`)}
+            setTasks({...tasks, 
+                online: true,
+                nomeUsuario: response.data.name
+            })
 
         })
-        console.log(usuario.membership)
 
         promise.catch(err => {
             if(err.message === "Request failed with status code 422"){
@@ -49,6 +47,7 @@ export default function TelaLogin(){
             alert(`Verifique se seus dados foram digitados corretamente e tente novamente! ;)`)
             console.log(err.message)
         })
+
     }
 
 

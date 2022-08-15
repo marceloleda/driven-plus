@@ -11,11 +11,9 @@ export default function FormTelaPlana(){
     const navigate = useNavigate();
     const {tasks, setTasks} = useContext(UserContext)
     const [home, setHome] = useState([])
+    
 
-    const homeDados = JSON.stringify(home)
-    localStorage.setItem("home", homeDados)
-
-
+ 
     const usuario = localStorage.getItem("usuario")
     const usuarioDados = JSON.parse(usuario)
     
@@ -31,7 +29,7 @@ export default function FormTelaPlana(){
         event.preventDefault();
         setTasks({...tasks, toggle: true});
     }
-    if(tasks.confirmarCompra === true){
+    if(tasks.confirmarCompra === true  && tasks.toggle === true){
         finalizarCompra();
     }
     
@@ -52,6 +50,7 @@ export default function FormTelaPlana(){
             console.log(response.data)
             setHome(response.data)
             navigate("/home")
+            console.log(home)
         })
         promise.catch((err)=> {
             alert("Verifique seus dados e tente novamente")
