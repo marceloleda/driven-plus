@@ -116,7 +116,7 @@ const Botao = styled.button`
     border-radius: 5px;
     border:none;
     cursor: pointer;
-    font-family: 'Lexend Deca';
+    font-family: 'Roboto';
     font-size: 20px;
     line-height: 26px;
     text-align: center;

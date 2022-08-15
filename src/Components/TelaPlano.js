@@ -6,6 +6,7 @@ import Perks from "../Assets/img/Vector.svg"
 import Money from "../Assets/img/money.svg"
 import UserContext from "../contexts/UserContext";
 import FormTelaPlana from "./FormTelaPlana";
+import TelaConfirmarCompra from "./TelaConfirmarCompra";
 
 
 
@@ -17,8 +18,8 @@ export default function TelaPlano(){
     const {idPlano} = useParams();
     const [plano, setPlano] = useState([]);
     const [perks,setPerks] = useState([]);
+    const [toggle, setToggle] =useState(false)
     console.log(plano)
-
     useEffect(()=>{
         const URL= `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships/${idPlano}`
         const config = {
@@ -28,18 +29,26 @@ export default function TelaPlano(){
         promise.then((response)=>{
             setPlano(response.data)
             setPerks(response.data.perks)
+            setTasks({...tasks, 
+                preco: response.data.price,
+                nome: response.data.name,
+                toggle: toggle
+            })
+
         })
         promise.catch((err)=> console.log(err.message))
     },[])
     return(
         <>
-            <Conteiner>
+            {tasks.toggle === false ? "" : <TelaConfirmarCompra />}
+
+            <Conteiner load={tasks.toggle}>
                 <img src={plano.image} alt="image"/>
                 <h1>{plano.name}</h1>
             </Conteiner>
             <Informacoes>
 
-                <Beneficios>
+                <Beneficios load={tasks.toggle}>
                     <Topico>
                         <img src={Perks} alt="beneficio"/>
                         <h2>Benefícios:</h2>
@@ -54,7 +63,7 @@ export default function TelaPlano(){
                     <h2>R$ {plano.price} cobrados mensalmente</h2> 
                 </Beneficios>
             </Informacoes>
-            <Conteiner>
+            <Conteiner load={tasks.toggle}>
                 <FormTelaPlana/>
             </Conteiner>
 
@@ -66,8 +75,9 @@ const Conteiner = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
     background: #0E0E13;
+    opacity:${(props)=> props.load === false? "1" : "0.5"};
+    pointer-events: ${(props)=> props.load === false? "" : "none"};
 
     img{
         width: 140px;
@@ -94,6 +104,8 @@ const Informacoes = styled.div`
 
 `;
 const Beneficios = styled.div`
+    opacity:${(props)=> props.load === false? "1" : "0.5"};
+
     h2{
         font-family: 'Roboto';
         font-style: normal;
@@ -103,6 +115,7 @@ const Beneficios = styled.div`
 
         color: #FFFFFF;
     }
+
 `;
 const Topico = styled.div`
 display:flex;

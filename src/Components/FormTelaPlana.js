@@ -8,31 +8,25 @@ import { useParams } from "react-router-dom";
 
 
 export default function FormTelaPlana(){
+    const {tasks, setTasks} = useContext(UserContext)
     const usuario = localStorage.getItem("usuario")
     const usuarioDados = JSON.parse(usuario)
-    const [toggle, setToggle] = useState(false);
-
+    console.log(tasks)
+    
     const {idPlano} = useParams();
     const [compra, setCompra] = useState({
-        cardName: " ",
+        cardName: "",
         cardNumber: "1234 1234 1234 1234",
         cvc: 123,
         data: "01/28"
     });
-    console.log(compra)
+    
     function temCerteza(event){
         event.preventDefault();
-        setToggle(true);
-        return(
-            <>
-
-            </>
-        )
-
-
+        setTasks({...tasks, toggle: true});
     }
-    function confirmarCompra(event){
-        event.preventDefault();
+    
+    if(tasks.confirmarCompra === true){
 
         const URL = `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions`;
         const body = {
@@ -56,7 +50,7 @@ export default function FormTelaPlana(){
 
     return(
         <>
-            <Conteiner load={toggle}>
+            <Conteiner >
                 <form onSubmit={temCerteza}>
                     <Inserir id="cartao" type="text" placeholder="Nome impresso no cartão" value={compra.nome} onChange={(e)=>
                         setCompra({...compra, nome: e.target.value})
@@ -80,8 +74,7 @@ export default function FormTelaPlana(){
 }
 const Conteiner = styled.div`
     display:flex;
-    opacity:${(props)=> props.load === false? "1" : "0.5"};
-    pointer-events: ${(props)=> props.load === false? "" : "none"};
+
 `
 const Inserir = styled.input`
     width: 299px;
@@ -120,11 +113,5 @@ const Botao = styled.button`
     line-height: 16px;
     color: #FFFFFF;
 `;
-const Confirmar = styled.div`
-    width: 248px;
-    height: 210px;
 
-    background: #FFFFFF;
-    border-radius: 12px;
-`
 
