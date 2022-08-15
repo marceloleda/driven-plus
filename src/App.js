@@ -6,6 +6,8 @@ import { createGlobalStyle } from "styled-components";
 import TelaCadastro from "./Components/TelaCadastro";
 import TelaLogin from "./Components/TelaLogin";
 import { useState } from "react";
+import TelaInscricao from "./Components/TelaInscricao";
+import TelaPlano from "./Components/TelaPlano";
 
 
 export default function App(){
@@ -18,7 +20,9 @@ export default function App(){
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<TelaLogin/>}/>
-                        <Route path="/cadastro" element={<TelaCadastro/>}/>
+                        <Route path="/sign-up" element={<TelaCadastro/>}/>
+                        <Route path="/subscriptions" element={<TelaInscricao/>}/>
+                        <Route path="/subscriptions/:idPlano" element={<TelaPlano/>}
 
                     </Routes>
                 </BrowserRouter>

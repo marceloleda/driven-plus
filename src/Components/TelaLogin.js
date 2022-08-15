@@ -2,15 +2,24 @@ import { useState } from "react";
 import styled from "styled-components";
 import Logo from "../Assets/img/Driven.svg"
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import UserContext from "../contexts/UserContext";
+import { useContext } from "react";
+
 
 
 
 export default function TelaLogin(){
+    const { tasks, setTasks } = useContext(UserContext);
+    const navigate = useNavigate();
+    const [usuario, setUsuario] = useState([]);
     const [login, setLogin] = useState({
         email: "",
         senha: ""
     })
+    const dadosUsuario = JSON.stringify(usuario)
+    localStorage.setItem("usuario", dadosUsuario)
+    
 
     function enviar(event){
         event.preventDefault();
@@ -20,8 +29,26 @@ export default function TelaLogin(){
             password: login.senha
         }
         const promise = axios.post(URL, dados)
-        
+        promise.then((response)=>{
+            setUsuario(response.data)
+            console.log(response.data)
+            navigate(`${usuario.membership !== null? "/subscriptions" : "/home"}`)
+
+        })
+        console.log(usuario.membership)
+
+        promise.catch(err => {
+            if(err.message === "Request failed with status code 422"){
+                alert(`Dados digitados podem esta errados`)
+            }
+           
+            alert(`Verifique se seus dados foram digitados corretamente e tente novamente! ;)`)
+            console.log(err.message)
+        })
     }
+
+
+
 
     return(
         <>
@@ -39,7 +66,7 @@ export default function TelaLogin(){
                     <Botao type="submit">ENTRAR</Botao>
                 </form>
                 <Cadastro>
-                    <Link to={`/cadastro`} >
+                    <Link to={`/sign-up`} >
                         <h2>Não possuí uma conta? Cadastre-se</h2>
                     </Link>
                 </Cadastro>
