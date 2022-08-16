@@ -11,7 +11,6 @@ export default function TelaLogin(){
     const {tasks, setTasks} = useContext(UserContext);
     const navigate = useNavigate();
     const [usuario, setUsuario] = useState([]);
-    const [home, setHome] = useState({})
     const [login, setLogin] = useState({
         email: "",
         senha: ""
@@ -19,7 +18,6 @@ export default function TelaLogin(){
     const dadosUsuario = JSON.stringify(usuario)
     localStorage.setItem("usuario", dadosUsuario)
 
-    console.log(home)
 
     function enviar(event){
         event.preventDefault();

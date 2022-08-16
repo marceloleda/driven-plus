@@ -25,7 +25,7 @@ export default function TelaConfirmarCompra(){
     );
 }
 const Confirmar = styled.div`
-    z-index:1000;
+    z-index:1;
     position: fixed;
     display:flex;
     align-items: center;

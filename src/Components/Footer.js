@@ -19,7 +19,7 @@ export default function Footer(){
             navigate(`/subscriptions`)
         })
         promise.catch((err)=> console.log(err.message))
-        
+        alert("Vc esta cancelando seu plano atual, para retornar para ele escolha o mesmo na pagina a seguir!")
     }
     return(
         <>

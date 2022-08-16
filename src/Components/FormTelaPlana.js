@@ -53,6 +53,7 @@ export default function FormTelaPlana(){
             setHome(response.data)
             navigate("/home")
             console.log(home)
+            setTasks({...tasks, confirmarCompra: false})
         })
         promise.catch((err)=> {
             alert("Verifique seus dados e tente novamente")
