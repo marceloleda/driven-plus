@@ -11,7 +11,9 @@ export default function FormTelaPlana(){
     const navigate = useNavigate();
     const {tasks, setTasks} = useContext(UserContext)
     const [home, setHome] = useState([])
-    
+
+    const dadosAtualizados = JSON.stringify(home)
+    localStorage.setItem("atualizado", dadosAtualizados)
 
  
     const usuario = localStorage.getItem("usuario")

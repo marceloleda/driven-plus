@@ -8,7 +8,6 @@ export default function Footer(){
     const navigate = useNavigate();
     function mudarPlano(){
         navigate(`/subscriptions`)
-        alert("Para vê seu plano alterado faça o login novamente!")
     }
     function cancelarPlano(){
         const URL = `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions`;
@@ -18,8 +17,6 @@ export default function Footer(){
         const promise = axios.delete(URL, config);
         promise.then((response)=>{
             navigate(`/subscriptions`)
-            alert("Para vê seu plano alterado faça o login novamente!")
-
         })
         promise.catch((err)=> console.log(err.message))
         

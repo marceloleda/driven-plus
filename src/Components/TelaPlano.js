@@ -21,7 +21,6 @@ export default function TelaPlano(){
     const [plano, setPlano] = useState([]);
     const [perks,setPerks] = useState([]);
     const [toggle, setToggle] =useState(false)
-    console.log(plano)
     useEffect(()=>{
         const URL= `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships/${idPlano}`
         const config = {
