@@ -74,6 +74,15 @@ const Conteiner = styled.div`
     Height:100vh;
     background: #0E0E13;
 
+    form{
+            display:flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+
     img{
         margin-top: 0px;
         width: 299px;
@@ -88,7 +97,6 @@ const Inserir = styled.input`
     width: 299px;
     height: 52px;
     margin-bottom: 16px;
-    margin-left: 36px;
     background: #FFFFFF;
     border: 1px solid #D5D5D5;
     border-radius: 5px;
@@ -102,7 +110,6 @@ const Botao = styled.button`
     align-items: center;
     width: 299px;
     height: 52px;
-    margin-left: 36px;
     margin-top: 20px;
     background: #FF4791;
     border-radius: 5px;
