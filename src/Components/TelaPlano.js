@@ -104,7 +104,6 @@ const Informacoes = styled.div`
     display:flex;
     flex-direction: column;
     justify-content: center;
-    margin-left:40px;
     margin-top:25px;
  
 
