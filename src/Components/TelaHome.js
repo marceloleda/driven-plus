@@ -18,7 +18,7 @@ export default function TelaHome(){
 
 
     const perk = usuarioDados.membership;
-    const tetes = atualizaoDados.membership;
+    const tetes = atualizaoDados === null? "" :atualizaoDados.membership;
 
     console.log(tetes)
 
@@ -26,7 +26,7 @@ export default function TelaHome(){
         <>
             <Conteiner>
                 <Topo>
-                    {tasks.toggle?  <img src={usuarioDados.membership.image} alt="foto"/> : <img src={atualizaoDados.membership.image} alt="foto"/>}
+                    {atualizaoDados === null?  <img src={usuarioDados.membership.image} alt="foto"/> : <img src={atualizaoDados.membership.image} alt="foto"/>}
                     <Perfi onClick={()=>{
                         navigate(`/`)
                     }}>
@@ -35,7 +35,7 @@ export default function TelaHome(){
                 </Topo>
                 <Sessao>
                     <h1>Olá, {usuarioDados.name}</h1>
-                    {tasks.toggle? 
+                    {atualizaoDados === null? 
                         perk.perks.map((perk,index)=>{
                             return(
                                 <Botao key={index} onClick={()=>{
@@ -60,6 +60,7 @@ export default function TelaHome(){
 const Conteiner = styled.div`
     display:flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     background: #0E0E13;
     padding: 30px;
@@ -85,6 +86,7 @@ const Perfi = styled.div`
     img{
         Width: 34px;
         Height: 32px;
+        margin-left: 200px;
     }
 `
 const Sessao = styled.div`

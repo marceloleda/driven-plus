@@ -6,12 +6,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import UserContext from "../contexts/UserContext";
 
 
-
 export default function TelaLogin(){
     const {tasks, setTasks} = useContext(UserContext);
     const navigate = useNavigate();
     const [usuario, setUsuario] = useState([]);
-    // const [perk, setPerk] = useState([])
     const [login, setLogin] = useState({
         email: "",
         senha: ""
@@ -35,9 +33,6 @@ export default function TelaLogin(){
 
             const usuarioDado = JSON.stringify(response.data)
             localStorage.setItem("perks", usuarioDado)
-
-            // localStorage.setItem("foto", response.data.membership.image)
-
 
             {response.data.membership ? navigate(`/home`) : navigate(`/subscriptions`)}
 
@@ -68,17 +63,19 @@ export default function TelaLogin(){
         <>
             <Conteiner>
                 <img src={Logo} alt="logo"/>
-                <form onSubmit={enviar}>
-                    <Inserir id="email" type="email" placeholder="email" value={login.email} onChange={(e)=>
-                    setLogin({...login, email: e.target.value})
-                    } required/>
+                <Forms>
+                    <form onSubmit={enviar}>
+                        <Inserir id="email" type="email" placeholder="email" value={login.email} onChange={(e)=>
+                        setLogin({...login, email: e.target.value})
+                        } required/>
 
-                    <Inserir id="senha" type="password" placeholder="senha" value={login.senha} onChange={(e)=>
-                    setLogin({...login, senha: e.target.value})
-                    }required/>
+                        <Inserir id="senha" type="password" placeholder="senha" value={login.senha} onChange={(e)=>
+                        setLogin({...login, senha: e.target.value})
+                        }required/>
 
-                    <Botao type="submit">ENTRAR</Botao>
-                </form>
+                        <Botao type="submit">ENTRAR</Botao>
+                    </form>
+                </Forms>
                 <Cadastro>
                     <Link to={`/sign-up`} >
                         <h2>Não possuí uma conta? Cadastre-se</h2>
@@ -107,12 +104,18 @@ const Conteiner = styled.div`
         color:white;
     }
 `;
+const Forms = styled.div`
+    display:flex;
+    justify-content: center;
+    align-items: center;
+`
 
 const Inserir = styled.input`
     width: 299px;
     height: 52px;
-    margin-bottom: 16px;
     margin-left: 36px;
+
+    margin-bottom: 16px;
     background: #FFFFFF;
     border: 1px solid #D5D5D5;
     border-radius: 5px;

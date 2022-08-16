@@ -14,7 +14,6 @@ import Seta from "../Assets/img/arrow.svg"
 export default function TelaPlano(){
     const navigate = useNavigate();
     const {tasks, setTasks} = useContext(UserContext);
-    console.log(tasks)
     const usuario = localStorage.getItem("usuario")
     const usuarioDados = JSON.parse(usuario)
     const {idPlano} = useParams();
@@ -44,7 +43,7 @@ export default function TelaPlano(){
     return(
         <>
             {tasks.toggle === false ? "" : <TelaConfirmarCompra />}
-            <Voltar onClick={()=>{
+            <Voltar load={tasks.toggle} onClick={()=>{
                 navigate(`/subscriptions`)
             }}>
                 <img src={Seta} alt="arrow"/>
@@ -149,5 +148,7 @@ margin-top:25px;
 cursor: pointer;
 Width: 28px;
 Height: 28px;
+opacity:${(props)=> props.load === false? "1" : "0.5"};
+pointer-events: ${(props)=> props.load === false? "" : "none"};
 
 `
