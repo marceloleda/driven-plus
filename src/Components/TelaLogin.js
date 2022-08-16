@@ -105,15 +105,18 @@ const Conteiner = styled.div`
     }
 `;
 const Forms = styled.div`
-    display:flex;
-    justify-content: center;
-    align-items: center;
+form{
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+
+    }
 `
 
 const Inserir = styled.input`
     width: 299px;
     height: 52px;
-    margin-left: 36px;
 
     margin-bottom: 16px;
     background: #FFFFFF;
@@ -131,7 +134,6 @@ const Botao = styled.button`
     align-items: center;
     width: 299px;
     height: 52px;
-    margin-left: 36px;
     background: #FF4791;
     border-radius: 5px;
     border:none;

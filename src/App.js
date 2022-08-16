@@ -35,9 +35,11 @@ export default function App(){
 
 const GlobalStyle = createGlobalStyle`
     body{
-        Width: 375px;
+        display:flex;
+        justify-content: center;
+        align-items:center;
         background: #0E0E13;
-        font-family: 'Lexend Deca', sans-serif;
+        font-family: 'Roboto';
     }
 `
 
