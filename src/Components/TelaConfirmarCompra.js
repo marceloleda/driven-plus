@@ -7,7 +7,7 @@ export default function TelaConfirmarCompra(){
     return(
         <>
             <Confirmar>
-                <h1>Tem certeza que deseja assinar o plano {tasks.nome} (R$ {tasks.preco})?</h1>
+                <h1>Tem certeza que deseja assinar o plano {tasks.nome} (R${tasks.preco})?</h1>
                 <Botoes>
                     <BotaoConfirmar onClick={()=>{
                         setTasks({...tasks, 
