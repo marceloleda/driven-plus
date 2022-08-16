@@ -142,11 +142,12 @@ h2{
     line-height: 19px;
     color: #FFFFFF;
 }
-
 `
 const Voltar = styled.div`
 margin-left:30px;
 margin-top:25px;
 cursor: pointer;
+Width: 28px;
+Height: 28px;
 
 `

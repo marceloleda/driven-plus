@@ -6,33 +6,27 @@ import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
 
 export default function TelaHome(){
+
     const navigate = useNavigate();
     const {tasks} =useContext(UserContext)
-
-    
 
     const usuario = localStorage.getItem("perks")
     const usuarioDados = JSON.parse(usuario)
     
+    const atualizado = localStorage.getItem("atualizado")
+    const atualizaoDados = JSON.parse(atualizado)
 
-    const picture = localStorage.getItem("foto")
-    const nome = localStorage.getItem("nome")
 
+    const perk = usuarioDados.membership;
+    const tetes = atualizaoDados.membership;
 
-    // const perkdado = localStorage.getItem("perk")
-    // const dadosPerks = JSON.parse(perkdado)
-    
-    // const atualizado = localStorage.getItem("atualizado")
-    // const atualizaoDados = JSON.parse(atualizado)
-    
-    
-    console.log()
+    console.log(tetes)
 
     return(
         <>
             <Conteiner>
                 <Topo>
-                    <img src={picture} alt="foto"/>
+                    {tasks.toggle?  <img src={usuarioDados.membership.image} alt="foto"/> : <img src={atualizaoDados.membership.image} alt="foto"/>}
                     <Perfi onClick={()=>{
                         navigate(`/`)
                     }}>
@@ -40,15 +34,23 @@ export default function TelaHome(){
                     </Perfi>
                 </Topo>
                 <Sessao>
-                    <h1>Olá, {nome}</h1>
-
-                    {usuarioDados.perks.map((perk,index)=>{
+                    <h1>Olá, {usuarioDados.name}</h1>
+                    {tasks.toggle? 
+                        perk.perks.map((perk,index)=>{
+                            return(
+                                <Botao key={index} onClick={()=>{
+                                    window.open(`${perk.link}`, '_blank')
+                                }}>{perk.title}</Botao>
+                            )
+                        })
+                    : tetes.perks.map((perk,index)=>{
                         return(
                             <Botao key={index} onClick={()=>{
                                 window.open(`${perk.link}`, '_blank')
                             }}>{perk.title}</Botao>
                         )
                     })}
+                 
                 </Sessao>
                 <Footer/>
             </Conteiner>

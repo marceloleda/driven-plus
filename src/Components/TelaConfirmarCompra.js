@@ -1,11 +1,20 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
+import Xis from "../Assets/img/xis.svg"
 
 export default function TelaConfirmarCompra(){
     const {tasks, setTasks} = useContext(UserContext);
     return(
         <>
+            <Butaox onClick={()=>{
+                  setTasks({...tasks, 
+                    toggle: false,
+                    confirmarCompra: false
+                })
+            }}>
+                <img src={Xis} alt="x"/>
+            </Butaox>
             <Confirmar>
                 <h1>Tem certeza que deseja assinar o plano {tasks.nome} (R${tasks.preco})?</h1>
                 <Botoes>
@@ -72,4 +81,15 @@ const Botoes = styled.div`
     width: 200px;
     margin-top:50px;
     justify-content: space-between;
+`
+const Butaox = styled.div`
+    z-index:1;
+    left:290px;
+    position:fixed;
+    cursor: pointer;
+
+    img{
+        width: 28px;
+        height: 28px;
+    }
 `

@@ -54,10 +54,14 @@ export default function FormTelaPlana(){
             console.log(response.data)
             setHome(response.data.membership)
             navigate("/home")
+
             console.log(home)
-            const foto = response.data.membership.image;
-            localStorage.setItem("foto", foto)
+
+            const atualiza = JSON.stringify(response.data)
+            localStorage.setItem("atualizado", atualiza)
+
             setTasks({...tasks, confirmarCompra: false})
+            window.location.reload()
         })
         promise.catch((err)=> {
             alert("Verifique seus dados e tente novamente")
