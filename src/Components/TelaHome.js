@@ -3,15 +3,27 @@ import Perfil from "../Assets/img/perfil.svg"
 import Footer from "./Footer";
 import {useNavigate} from "react-router-dom"
 import { useContext } from "react";
+import UserContext from "../contexts/UserContext";
 
 export default function TelaHome(){
     const navigate = useNavigate();
+    const {tasks} = useContext(UserContext);
+    
+
     const usuario = localStorage.getItem("usuario")
     const usuarioDados = JSON.parse(usuario)
 
+    const task = tasks.perks
+
+    const dadosUsuario = JSON.stringify(task)
+    localStorage.setItem("perk", dadosUsuario)
+
+    const perkdado = localStorage.getItem("perk")
+    const dadosPerks = JSON.parse(perkdado)
     
     const atualizado = localStorage.getItem("atualizado")
     const atualizaoDados = JSON.parse(atualizado)
+    
     
     const perks = atualizaoDados.membership.perks;
 
@@ -19,7 +31,7 @@ export default function TelaHome(){
         <>
             <Conteiner>
                 <Topo>
-                    <img src={atualizaoDados.membership.image} alt="foto"/>
+                    <img src={task.image} alt="foto"/>
                     <Perfi onClick={()=>{
                         navigate(`/`)
                     }}>
@@ -27,8 +39,8 @@ export default function TelaHome(){
                     </Perfi>
                 </Topo>
                 <Sessao>
-                    <h1>Olá, {usuarioDados.name}</h1>
-                    {perks.map((perk,index)=>{
+                    <h1>Olá, {task.nomeUsuario}</h1>
+                    {dadosPerks.map((perk,index)=>{
                         return(
                             <Botao key={index} onClick={()=>{
                                 window.open(`${perk.link}`, '_blank')

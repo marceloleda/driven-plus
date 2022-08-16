@@ -32,7 +32,10 @@ export default function TelaLogin(){
             {response.data.membership ? navigate(`/home`) : navigate(`/subscriptions`)}
             setTasks({...tasks, 
                 online: true,
-                nomeUsuario: response.data.name
+                nomeUsuario: response.data.name,
+                perks: response.data.membership.perks,
+                image: response.data.membership.image
+
             })
 
         })
