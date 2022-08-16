@@ -11,7 +11,6 @@ export default function FormTelaPlana(){
     const navigate = useNavigate();
     const {tasks, setTasks} = useContext(UserContext)
     const [home, setHome] = useState([])
-    const [perks, setPerks] = useState([])
 
     const dadosAtualizados = JSON.stringify(home)
     localStorage.setItem("atualizado", dadosAtualizados)
@@ -80,12 +79,16 @@ export default function FormTelaPlana(){
                     <Inserir type="text" placeholder="Digitos do cartão" maxlength="10" title="" 
                             value={compra.cardNumber} onChange={(e) => setCompra({...compra, cardNumber: e.target.value})
                         } required/>
-                    <Inserir type="number" placeholder="Código de segurança" maxlength="10" title="Digite o codigo CVC do seu cartao. Exemplo: 321" 
-                            value={compra.cvc} onChange={(e) => setCompra({...compra, cvc: e.target.value})
-                        } required/>
-                    <Inserir pattern="\d{2}\/\d{2}" type="text" placeholder="Validade" maxlength="10" title="Digite a data de vencimento. exemplo: DD/MM" 
-                            value={compra.data} onChange={(e) => setCompra({...compra, data: e.target.value})
-                        } required/>
+
+                    <Botoes>
+                        <InserirMenor type="number" placeholder="Código de segurança" maxlength="10" title="Digite o codigo CVC do seu cartao. Exemplo: 321" 
+                                value={compra.cvc} onChange={(e) => setCompra({...compra, cvc: e.target.value})
+                            } required/>
+                        <InserirMenor pattern="\d{2}\/\d{2}" type="text" placeholder="Validade" maxlength="10" title="Digite a data de vencimento. exemplo: DD/MM" 
+                                value={compra.data} onChange={(e) => setCompra({...compra, data: e.target.value})
+                            } required/>
+
+                    </Botoes>
                     <Botao type="submit">ASSINAR</Botao>
                 </form>
 
@@ -95,13 +98,39 @@ export default function FormTelaPlana(){
 }
 const Conteiner = styled.div`
     display:flex;
+ 
+    form{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+        justify-content:space-between;
+
+    }
+
+`
+const Botoes = styled.div`
+    display:flex;
+    width: 295px;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom: 15px;
+
+`
+const InserirMenor = styled.input`
+    width: 145px;
+    height: 52px;
+    background: #FFFFFF;
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
 
 `
 const Inserir = styled.input`
     width: 299px;
     height: 52px;
     margin-bottom: 16px;
-    margin-left: 30px;
     background: #FFFFFF;
     border: 1px solid #D5D5D5;
     border-radius: 5px;
@@ -110,13 +139,7 @@ const Inserir = styled.input`
     &:first-child{
         margin-top: 30px;
     }
-    &:nth-child(3){
-        width: 145px;
-    }
-    &:nth-child(4){
-        width: 145px;
-        margin-left: 10px;
-    }
+   
 `;
 const Botao = styled.button`
     display: flex;
@@ -124,7 +147,6 @@ const Botao = styled.button`
     align-items: center;
     width: 299px;
     height: 52px;
-    margin-left: 30px;
     background: #FF4791;
     border-radius: 5px;
     border:none;

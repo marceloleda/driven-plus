@@ -19,7 +19,7 @@ export default function TelaPlano(){
     const {idPlano} = useParams();
     const [plano, setPlano] = useState([]);
     const [perks,setPerks] = useState([]);
-    const [toggle, setToggle] =useState(false)
+    const [toggle] =useState(false)
     useEffect(()=>{
         const URL= `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships/${idPlano}`
         const config = {
@@ -53,7 +53,6 @@ export default function TelaPlano(){
                 <h1>{plano.name}</h1>
             </Conteiner>
             <Informacoes>
-
                 <Beneficios load={tasks.toggle}>
                     <Topico>
                         <img src={Perks} alt="beneficio"/>
@@ -104,7 +103,8 @@ const Conteiner = styled.div`
 const Informacoes = styled.div`
     display:flex;
     flex-direction: column;
-    margin-left:30px;
+    justify-content: center;
+    margin-left:40px;
     margin-top:25px;
  
 

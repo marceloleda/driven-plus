@@ -2,13 +2,11 @@ import styled from "styled-components";
 import Perfil from "../Assets/img/perfil.svg"
 import Footer from "./Footer";
 import {useNavigate} from "react-router-dom"
-import { useContext } from "react";
-import UserContext from "../contexts/UserContext";
+
 
 export default function TelaHome(){
 
     const navigate = useNavigate();
-    const {tasks} =useContext(UserContext)
 
     const usuario = localStorage.getItem("perks")
     const usuarioDados = JSON.parse(usuario)
@@ -26,7 +24,7 @@ export default function TelaHome(){
         <>
             <Conteiner>
                 <Topo>
-                    <img src={atualizaoDados.membership.image} alt="foto"/>
+                    {atualizaoDados.membership === undefined?  <img src={usuarioDados.membership.image} alt="foto"/> : <img src={atualizaoDados.membership.image} alt="foto"/>}
                     <Perfi onClick={()=>{
                         navigate(`/`)
                     }}>
@@ -35,7 +33,7 @@ export default function TelaHome(){
                 </Topo>
                 <Sessao>
                     <h1>Olá, {usuarioDados.name}</h1>
-                    {atualizaoDados === null? 
+                    {atualizaoDados.membership === undefined? 
                         perk.perks.map((perk,index)=>{
                             return(
                                 <Botao key={index} onClick={()=>{
