@@ -26,7 +26,7 @@ export default function TelaHome(){
         <>
             <Conteiner>
                 <Topo>
-                    {atualizaoDados === null?  <img src={usuarioDados.membership.image} alt="foto"/> : <img src={atualizaoDados.membership.image} alt="foto"/>}
+                    <img src={atualizaoDados.membership.image} alt="foto"/>
                     <Perfi onClick={()=>{
                         navigate(`/`)
                     }}>
