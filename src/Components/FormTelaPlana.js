@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
@@ -11,6 +11,7 @@ export default function FormTelaPlana(){
     const navigate = useNavigate();
     const {tasks, setTasks} = useContext(UserContext)
     const [home, setHome] = useState([])
+    const [perks, setPerks] = useState([])
 
     const dadosAtualizados = JSON.stringify(home)
     localStorage.setItem("atualizado", dadosAtualizados)
@@ -19,6 +20,7 @@ export default function FormTelaPlana(){
     const usuario = localStorage.getItem("usuario")
     const usuarioDados = JSON.parse(usuario)
     
+
     const {idPlano} = useParams();
     const [compra, setCompra] = useState({
         cardName: "",
@@ -50,9 +52,11 @@ export default function FormTelaPlana(){
         const promise = axios.post(URL, body, config);
         promise.then((response)=>{
             console.log(response.data)
-            setHome(response.data)
+            setHome(response.data.membership)
             navigate("/home")
             console.log(home)
+            const foto = response.data.membership.image;
+            localStorage.setItem("foto", foto)
             setTasks({...tasks, confirmarCompra: false})
         })
         promise.catch((err)=> {

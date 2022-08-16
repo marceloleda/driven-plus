@@ -7,31 +7,32 @@ import UserContext from "../contexts/UserContext";
 
 export default function TelaHome(){
     const navigate = useNavigate();
-    const {tasks} = useContext(UserContext);
+    const {tasks} =useContext(UserContext)
+
     
 
-    const usuario = localStorage.getItem("usuario")
+    const usuario = localStorage.getItem("perks")
     const usuarioDados = JSON.parse(usuario)
-
-    const task = tasks.perks
-
-    const dadosUsuario = JSON.stringify(task)
-    localStorage.setItem("perk", dadosUsuario)
-
-    const perkdado = localStorage.getItem("perk")
-    const dadosPerks = JSON.parse(perkdado)
     
-    const atualizado = localStorage.getItem("atualizado")
-    const atualizaoDados = JSON.parse(atualizado)
+
+    const picture = localStorage.getItem("foto")
+    const nome = localStorage.getItem("nome")
+
+
+    // const perkdado = localStorage.getItem("perk")
+    // const dadosPerks = JSON.parse(perkdado)
+    
+    // const atualizado = localStorage.getItem("atualizado")
+    // const atualizaoDados = JSON.parse(atualizado)
     
     
-    const perks = atualizaoDados.membership.perks;
+    console.log()
 
     return(
         <>
             <Conteiner>
                 <Topo>
-                    <img src={task.image} alt="foto"/>
+                    <img src={picture} alt="foto"/>
                     <Perfi onClick={()=>{
                         navigate(`/`)
                     }}>
@@ -39,8 +40,9 @@ export default function TelaHome(){
                     </Perfi>
                 </Topo>
                 <Sessao>
-                    <h1>Olá, {task.nomeUsuario}</h1>
-                    {dadosPerks.map((perk,index)=>{
+                    <h1>Olá, {nome}</h1>
+
+                    {usuarioDados.perks.map((perk,index)=>{
                         return(
                             <Botao key={index} onClick={()=>{
                                 window.open(`${perk.link}`, '_blank')

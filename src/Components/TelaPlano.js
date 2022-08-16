@@ -50,7 +50,7 @@ export default function TelaPlano(){
                 <img src={Seta} alt="arrow"/>
             </Voltar>
             <Conteiner load={tasks.toggle}>
-                <img src={plano.image} alt="image"/>
+                <img src={plano.image} alt="fil"/>
                 <h1>{plano.name}</h1>
             </Conteiner>
             <Informacoes>

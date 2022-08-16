@@ -11,12 +11,17 @@ export default function TelaLogin(){
     const {tasks, setTasks} = useContext(UserContext);
     const navigate = useNavigate();
     const [usuario, setUsuario] = useState([]);
+    const [perk, setPerk] = useState([])
     const [login, setLogin] = useState({
         email: "",
         senha: ""
     })
     const dadosUsuario = JSON.stringify(usuario)
     localStorage.setItem("usuario", dadosUsuario)
+
+    const usuarioDado = JSON.stringify(perk)
+    localStorage.setItem("perks", usuarioDado)
+   
 
 
     function enviar(event){
@@ -29,14 +34,22 @@ export default function TelaLogin(){
         const promise = axios.post(URL, dados)
         promise.then((response)=>{
             setUsuario(response.data)
+            setPerk(response.data.membership)
+
             {response.data.membership ? navigate(`/home`) : navigate(`/subscriptions`)}
+
+            const foto = response.data.membership.image;
+            localStorage.setItem("foto", foto)
+
+            const nome = response.data.name;
+            localStorage.setItem("nome", nome)
+
             setTasks({...tasks, 
                 online: true,
                 nomeUsuario: response.data.name,
-                perks: response.data.membership.perks,
-                image: response.data.membership.image
-
+                perks: response.data.membership
             })
+            console.log(tasks)
 
         })
 
